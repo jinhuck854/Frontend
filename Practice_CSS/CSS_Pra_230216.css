@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+  /*
+selector{
+  property: value;
+}*/
+
+*{
+  color:green;
+}
+
+li{
+  color:blue;
+}
+
+#input_name{
+  color:pink;
+}
+
+.red{
+  width:30px;
+  height:70px;
+  background: yellow;
+}
+
+.blue{
+    width:30px;
+  height:70px;
+  background: grey;
+}
+
+button:hover{
+  color: red;
+  background: beige;
+}
+
+a[href]{
+  color:purple;
+}
+
+.box1{
+  width:100px;
+  height:100px;
+  padding:20px 20px 20px 20px; /* 시계방향 : 위, 오른쪽, 밑, 왼쪽 */
+  margin:20px;
+  border:2px dashed red;
+  background:yellow;
+}
+
+.box2{
+  
+}
+  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+  </head>
+  
+  <body>
+    <!-- Box vs Item -->
+    <header>Header !</header>
+    <br><hr><br>
+    <nav>목차</nav><br>
+    <section>문서 장/절</section><br>
+    <article>독립적 댓글?</article><br>
+    <aside>팁, 기사, 광고</aside><br>
+    <footer>저자, 저작권, 상업자 번호, 담당자</footer><br>
+    
+    
+    <h1>H1</h1>
+    <button></button>
+    
+    
+    <!-- a -->
+    <a href="https://naver.com" target = _blank>Click</a>
+    
+    <p>This is a sentence. <b>That</b> is... </p>
+    <p>This is a sentence. <span>That</span> is... </p>
+    <p>This is a sentence. <div>That</div> is... </p> <!-- div : Block 레벨 단위 -->
+  
+    <!-- ol, ul, li -->
+    <ol class = "blue" type = "i" reversed>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ol>
+  
+    <ul class ="red">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  
+  
+    <!-- Input -->
+    <label id = "input_name" for="">Name : </label> 
+    <input id = "input_name" type ="text"> <!-- NDM HTML Website "input" 참고 -->
+    <button>Button 1</button>
+    <button>Button 2</button>
+  
+    <div class = "box1">1</div>
+    <div class = "box2">2</div>
+  </body>
+</html>
