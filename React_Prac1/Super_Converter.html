@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div> <!-- id : root 로 위치 저장 -->
+</body>
+
+<!--    React.js => HTML    -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!--    Babel : JSX => React.JS   -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+<script type="text/babel"> // script type="text/babel" : JSX를 JS 방식으로 변환해줌
+    function MinutesToHours(){ // Minutes <-> Hours
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+
+        const onChange = (event) => { // 값 변화 렌더링 : setAmount
+            console.log(event.target.value);
+            setAmount(event.target.value);
+        };
+
+        const reset = () => setAmount(0); // 값 초기화
+
+        const flip = () => { // 단위 변환 바꾸기
+            reset();
+            setFlipped((current) => !current);
+        }
+
+        return ( // 페이지
+            <div>
+                <h3>Minutes & Hours</h3>
+                <div>
+                    <label for="minutes">Minutes : </label>
+                    <input value={flipped ? amount*60 : amount} id="minutes" placeholder="Minutes" type="number" onChange={onChange} disabled={flipped}/>
+                </div>
+
+                <div>
+                    <label for="hours">Hours : </label>
+                    <input value={flipped ? amount : amount/60} id="hours" placeholder="Hours" type="number" disabled={!flipped} onChange={onChange}/>
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={flip}>Flip</button>
+                <hr />
+            </div>
+        );
+    }
+
+    function KmToMiles(){ // km <-> Miles
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+
+        const onChange = (event) => {
+            console.log(event.target.value);
+            setAmount(event.target.value);
+        };
+
+        const reset = () => setAmount(0); // 스위칭 때마다 초기값
+
+        const flip = () => {
+            reset();
+            setFlipped((current) => !current);
+        }
+
+        return (
+            <div>
+                <h3>Km & Miles</h3>
+                <div>
+                    <label for="km">Km : </label>
+                    <input value={flipped ? amount*1.609 : amount} id="km" placeholder="Km" type="number" onChange={onChange} disabled={flipped}/>
+                </div>
+                
+                <div>
+                    <label for="miles">Miles : </label>
+                    <input value={flipped ? amount : amount/1.609} id="miles" placeholder="Miles" type="number" onChange={onChange} disabled={!flipped}/>
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={flip}>Flip</button>
+                <hr />
+            </div>
+        )
+    }
+
+    function App(){ // 렌더링 대상
+        const [index, setIndex] = React.useState("xx");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        };
+
+        return(
+            <div>
+                <h1>Super Converter</h1>
+                <select value={index} onChange={onSelect}>
+                    <option value="xx">Select your units</option>
+                    <option value="0">Minutes & Hours</option>
+                    <option value="1">Km & Miles</option>
+                </select>
+                <hr />
+                {index === "xx" ? "Please select your units" : null}
+                {index === "0" ? <MinutesToHours /> : null}
+                {index === "1" ? <KmToMiles /> : null}
+
+            </div>
+        )
+
+    }
+    
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
