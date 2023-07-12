@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+}
+
+.black-nav{
+  display: flex; /* 모르겠음 */
+  background: black; /* 배경색깔  = 검정색 */
+  width: 100%; /* 너비 100% = 부모의 틀 안에서 100% 쓰겠다 // 100vh = 부모에 상관없이 100% vh만큼 쓰겠다*/ 
+  color: white; /* 글자 색깔 = 흰색 */
+  padding-left: 20px; /* 왼쪽 여백 = 20px */
+}
+
+.list{
+  padding-left: 20px;
+  text-align: left;
+  border-bottom: 1px solid grey;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
