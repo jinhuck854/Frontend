@@ -1,4 +1,4 @@
 # Frontend
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Frontend !&fontSize=90" />
+<img src="https://capsule-render.vercel.app/api?type=wave&color=auto&height=300&section=header&text=Front%20end&fontSize=90" />
 
 프론트엔드 개발 공부
