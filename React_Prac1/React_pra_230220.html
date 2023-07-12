@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<!--    React.js => HTML    -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!--    Babel : JSX => React.JS   -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel"> // script type="text/babel" : JSX를 JS 방식으로 변환해줌
+    // 오래된 React 코딩 방식
+    /*
+    const root = document.getElementById("root");
+    const btn = React.createElement(
+        "button", 
+        
+        {
+            onClick: () => console.log("Button Clicked!"),
+            style:{backgroundColor:"tomato"}
+        },
+        
+        "Click me"
+    );
+
+    const h3 = React.createElement("h3",
+        {
+            onMouseEnter:() => console.log("mouse enter")
+        }, "Hello I'm a Span !");
+
+
+    const container = React.createElement("div", null, [btn, h3]);
+    ReactDOM.render(container, root);
+    */
+
+    // JSX : Java Script의 확장버전 : 함수 표현식으로 만들기, HTML같은 React 문법, 컴포넌트 불러오기(대문자), 렌더링
+    const root = document.getElementById("root");
+
+    const Title = () => (<h3 id="title" onMouseEnter={()=> console.log("Mouse enter !")}>
+        Hello I'm a Span !
+    </h3>);
+
+    const Button = () => (<button style={{ background:"tomato"}} onClick={() => console.log("Button Cliked !")} >
+        Click me !
+    </button>);
+
+    const Container = () => (
+        <div>
+            <Title />
+            <Button />
+        </div>
+    );
+    ReactDOM.render(<Container />, root);
+
+</script>
+
+</html>
