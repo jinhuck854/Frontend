@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<!--    React.js => HTML    -->
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!--    Babel : JSX => React.JS   -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+<script type="text/babel"> // script type="text/babel" : JSX를 JS 방식으로 변환해줌
+
+    function App(){
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+            console.log(event.target.value);
+            setAmount(event.target.value);
+        };
+
+        const reset = () => setAmount(0);
+
+        const flip = () => {
+            reset();
+            setFlipped((current) => !current);
+        }
+
+        return (
+            <div>
+                <h1>Super Converter</h1>
+                <div>
+                    <label for="minutes">Minutes : </label>
+                    <input value={flipped ? amount*60 : amount} id="minutes" placeholder="Minutes" type="number" onChange={onChange} disabled={flipped}/>
+                </div>
+
+                <div>
+                    <label for="hours">Hours : </label>
+                    <input value={flipped ? amount : amount/60} id="hours" placeholder="Hours" type="number" disabled={!flipped} onChange={onChange}/>
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={flip}>Flip</button>
+            </div>
+        );
+    }
+    
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+</script>
+
+</html>
