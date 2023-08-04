@@ -1,32 +1,42 @@
+<!-- HTML 영역 -->
 <template> <!-- html이랑 비슷함 !-->
 
-  <div class="black-bg" v-if="is_open == true">
-    <div class="white-bg">
-      <h4> 상세페이지 </h4>
-      <p> 상세페이지 내용 </p>
-      <button @click="is_open = false"> 닫기</button>
-    </div>
-  </div>
-
+  <Modal :rooms = "rooms" :press_room_num ="press_room_num" :is_open = "is_open"/> <!-- Props 단계 1 데이터 보내기 : (데이터이름 = "데이터이름")-->
 
   <div class="menu">
     <a v-for="name in menus" :key="name"> {{name}} {{i}}</a>
   </div>
 
+  <Discount/> <!-- 컴포넌트 -->
+
   <img alt="Vue logo" src="./assets/logo.png">
 
   <h1> 원룸샵 </h1>
 
-  <div v-for="(products, i) in products" :key="i">
-    <img src="./assets/room0.jpg" class="room-img" alt="Room Images">
-    <h4 @click="is_open = true">{{products}} </h4>
-    <p> {{price[i]}} </p>
-    <button v-on:click="increase(i)">허위매물신고</button> <span>신고 : {{report_cnt[i]}}</span><br>
-    <!-- <button @mouseover="report_cnt ++">재미매물신고</button> <span>재미 : {{report_cnt[0]}}</span> !-->
+  <Card :rooms = "rooms" :press_room_nu ="press_room_num" :is_open="is_open"/> <!-- 컴포넌트 + Props-->
+
+  <!--
+  <div v-for="(rooms_info, i) in rooms" :key="i">
+    <img :src="rooms_info.image" class="room-img" alt="Room Images">  :src 주의
+    <h2 @click="is_open = true; press_room_num = i"> {{ rooms_info.id + 1}} : {{ rooms_info.title }} </h2>
+    <p> 월세 : {{ rooms_info.price / 10000}} 만 원</p><br>
+  </div> 
+  !-->
+
+  <div class="menu">
+    <div class="white-bg" v-if="is_open == true">
+    </div>
   </div>
 
 </template>
+
+
+<!-- JS 영역 -->
 <script>
+import Modal from './Modal.vue';
+import room_data from './assets/room_data.js';
+import Discount from './Discount.vue';
+import Card from './Card.vue';
 
 export default {
   name: 'App',
@@ -34,12 +44,11 @@ export default {
   data(){ // 데이터바인딩 : 데이터 보관함
     return{
       // images : ["room0.jpg", 'room1.jpg', 'room2.jpg'], // img src를 배열에 넣어서 쓰려고 했는데, 인코딩 때 안됨
-
+      press_room_num : 1, 
+      rooms : room_data, // 집에 대한 데이터 import 함
       is_open : false, // UI 상태 열린/닫힌 상태 구분
       menus : ['Home', 'Shop', 'About', 'Call'],
-      products : ['역삼동건물', '천호동원룸', '마포구원룸'],
-      price : [50, 60, 70],
-      report_cnt : [0, 0, 0],
+      report_cnt : [0, 0, 0, 0, 0],
     }
   },
 
@@ -47,15 +56,18 @@ export default {
     increase(i){
      this.report_cnt[i] ++; 
     }
-
   },
 
-  components: {
-
+  components: { // Component 단계 2. 컴포넌트 등록
+    Discount : Discount, // (변수명) : (import 한 파일 내용) // Discount, 로 함축 가능
+    Modal : Modal,
+    Card : Card,
   }
 }
 </script>
 
+
+<!-- CSS 영역 -->
 <style>
 
 body{
@@ -95,7 +107,7 @@ div{
 .menu{
   background: darkslateblue;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .menu a{
