@@ -1,33 +1,30 @@
 <!-- HTML 영역 -->
 <template> <!-- html이랑 비슷함 !-->
+  <!-- 상세 페이지 : 컴포넌트 -->
+  <Modal @closeModal="is_open=false" :rooms = "rooms" :press_room_num ="press_room_num" :is_open = "is_open"/>
 
-  <Modal :rooms = "rooms" :press_room_num ="press_room_num" :is_open = "is_open"/> <!-- Props 단계 1 데이터 보내기 : (데이터이름 = "데이터이름")-->
-
+  <!-- 상단 메뉴 -->
   <div class="menu">
     <a v-for="name in menus" :key="name"> {{name}} {{i}}</a>
   </div>
 
-  <Discount/> <!-- 컴포넌트 -->
+  <!-- 할인 배너 : 컴포넌트 -->
+  <Discount/>
 
+  <!-- Vue 로고 -->
   <img alt="Vue logo" src="./assets/logo.png">
 
   <h1> 원룸샵 </h1>
 
-  <Card :rooms = "rooms" :press_room_nu ="press_room_num" :is_open="is_open"/> <!-- 컴포넌트 + Props-->
+  <!-- 메인 페이지 - 방 미리보기 : 컴포넌트 -->
+  <Card @openModal="is_open=true;
+  press_room_num = $event" :rooms="rooms" :press_room_num="press_room_num" :is_open="is_open"
+  v-for="(rooms, i) in rooms" :key="i"/>
 
-  <!--
-  <div v-for="(rooms_info, i) in rooms" :key="i">
-    <img :src="rooms_info.image" class="room-img" alt="Room Images">  :src 주의
-    <h2 @click="is_open = true; press_room_num = i"> {{ rooms_info.id + 1}} : {{ rooms_info.title }} </h2>
-    <p> 월세 : {{ rooms_info.price / 10000}} 만 원</p><br>
-  </div> 
-  !-->
-
+  <!-- 하단 메뉴 -->
   <div class="menu">
-    <div class="white-bg" v-if="is_open == true">
-    </div>
+    <div class="white-bg" v-if="is_open == true"></div>
   </div>
-
 </template>
 
 
