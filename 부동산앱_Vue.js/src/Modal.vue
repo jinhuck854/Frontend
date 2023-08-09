@@ -11,7 +11,7 @@
       <p> 기본 월세 : {{ rooms[press_room_num].price / 10000 }} 만 원</p>
 
       <input v-model="month" type="range" min="1" max="12"><br>
-      <input v-model.number="month"> <!-- v-model.number : 숫자 자료형으로 변환 -->
+      <input v-model.number="month">
       <p> 입력한 {{ month }} 개월 : {{ (rooms[press_room_num].price / 10000) * month  }} 만 원</p>
 
       <button @click="$emit('closeModal')">닫기</button>
@@ -19,20 +19,6 @@
   </div>
 </template>
 
-<!--
-  (데이터 입력)
-    input @input : 사용자가 데이터를 입력하고 확인할 때마다 바뀌는 이벤트 리스너
-    input @change : 사용자가 데이터를 입력하고 다른 곳을 클릭할 때마다 바뀌는 이벤트 리스너
-    ??? <input @input="month = $event.target.value"> : 
-      -> <input v-model="month"> : input에 입력한 데이터를 저장함
-      cf. 초기값이 중요함. 초기값을 Number로 하고, 문장ㄹ을 받는다면 끝남
-
-  (원하는 데이터 자료형만 쓰는법)
-    watcher // data 감시하는 함수) : month의 데이터가 변할 때마다 자료형 검토함
-      -> data(){return{ 변수명 : 자료형 }}
-    활용) 이메일 형식, 비밀번호 대문자 또는 특수문자 포함했는지 데이터 검사
-    정보) Vue 전용 form validation 라이브러리에서 자료 많이 공유하고 있음.
--->
 
 <script>
 export default {
@@ -65,6 +51,7 @@ export default {
     }
 }
 </script>
+
 
 <style>
 
