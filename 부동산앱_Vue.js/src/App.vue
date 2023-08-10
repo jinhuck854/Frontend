@@ -5,6 +5,7 @@
   <Transition name="fade">
     <Modal @closeModal="is_open=false" :rooms = "rooms" :press_room_num ="press_room_num" :is_open = "is_open"/>
   </Transition>
+
   <!-- 상단 메뉴 -->
   <div class="menu">
     <a v-for="name in menus" :key="name"> {{name}} {{i}}</a>
@@ -13,10 +14,22 @@
   <!-- 할인 배너 : 컴포넌트 -->
   <!-- <Discount/> -->
 
+  <!-- 정렬 버튼
+  <select>
+    <option> 기본 정렬 </option>
+    <option @click="priceSort"> 가격순 정렬 </option>
+  </select>
+  -->
+
   <!-- Vue 로고 -->
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
 
   <h1> 원룸샵 </h1>
+  <button @click="priceSortUp" class="roomSortButton"> 가격 낮은순 정렬 </button>
+  <button @click="priceSortDown" class="roomSortButton"> 가격 높은순 정렬 </button>
+  <button @click="nameSortUp" class="roomSortButton"> 이름순 정렬 </button>
+  <button @click="nameSortDown" class="roomSortButton"> 이름 역순 정렬 </button>
+  <button @click="rollBack" class="roomSortButton"> 원래대로 </button>
 
   <!-- 메인 페이지 - 방 미리보기 : 컴포넌트 -->
   <Card @openModal="is_open=true;
@@ -42,8 +55,9 @@ export default {
 
   data(){ // 데이터바인딩 : 데이터 보관함
     return{
-      press_room_num : 1, 
-      rooms : room_data,
+      press_room_num : 1,
+      roomsOrigin: [...room_data], // 데이터 원본 : 데이터 변경 X // Deep Copy : [...Array 변수명] 사본을 별개로 가짐
+      rooms : room_data, // 데이터 사본 : 데이터 변경 O
       is_open : false,
       menus : ['Home', 'Shop', 'About', 'Call'],
       report_cnt : [0, 0, 0, 0, 0],
@@ -51,8 +65,32 @@ export default {
   },
 
   methods : {
-    increase(i){
-     this.report_cnt[i] ++; 
+    priceSortUp(){ // 가격 오름차순 정렬 : sort(function(a,b) { return a-b })를 사용
+      this.rooms.sort(function(a,b){
+        return a.price - b.price;
+      });      
+    },
+
+    priceSortDown(){ // 가격 내림차순 정렬
+      this.rooms.sort(function(a,b){
+        return b.price - a.price;
+      });
+    },
+
+    nameSortUp(){ // 이름순 정렬
+      this.rooms.sort(function(a,b){
+        return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+      });
+    },
+
+    nameSortDown(){ // 이름 역순 정렬
+      this.rooms.sort(function(a,b){
+        return b.title < a.title ? -1 : b.title > a.title ? 1 : 0;
+      });
+    },
+
+    rollBack(){ // 원래대로
+      this.rooms = [...this.roomsOrigin]; // 안되려나?
     }
   },
 
