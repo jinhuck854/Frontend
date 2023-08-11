@@ -12,9 +12,9 @@
   </div>
 
   <!-- 할인 배너 : 컴포넌트 -->
-  <!-- <Discount/> -->
+  <Discount @discounting="discountNum=discountNum" :discountNum = "discountNum"/>
 
-  <!-- 정렬 버튼
+  <!-- 정렬 버튼 : select 버튼으로 정렬 순서 구분하기가 안되나?
   <select>
     <option> 기본 정렬 </option>
     <option @click="priceSort"> 가격순 정렬 </option>
@@ -47,7 +47,7 @@
 <script>
 import Modal from './Modal.vue';
 import room_data from './assets/room_data.js';
-// import Discount from './Discount.vue';
+import Discount from './Discount.vue';
 import Card from './Card.vue';
 
 export default {
@@ -61,6 +61,7 @@ export default {
       is_open : false,
       menus : ['Home', 'Shop', 'About', 'Call'],
       report_cnt : [0, 0, 0, 0, 0],
+      discountNum : 10, // 할인율 초기값 : 30%
     }
   },
 
@@ -91,11 +92,25 @@ export default {
 
     rollBack(){ // 원래대로
       this.rooms = [...this.roomsOrigin]; // 안되려나?
-    }
+    },
   },
 
+  mounted(){ // LifeCycle : 1초마다 discountNum을 1%씩 감소시킴
+    setInterval(()=> { // arrow function 구문을 써야 this 문법을 제대로 사용할 수 있다
+      if(this.discountNum > 1)
+        this.discountNum -= 1;
+    }, 1000);
+  },
+
+  // 숙제1 : 메인페이지 로드 후(mount) 부터 30%할인 문구가 1초마다 1%씩 감소됨. setInterval(() => {}, 1000)
+  // -> props로 상위-하위 컴포넌트 데이터 연결.
+  // 커스텀 이벤트로 하위 컴포넌트에서 데이터 변경될 때마다, 상위 컴포넌트에 요청.
+  // when? 1초마다
+
+  // 숙제2 : Modal 입력 기입 후 재렌더링함. lifecycle용어로 update라고 말함. update 전에 hook 걸어보기.
+
   components: { // Component
-    // Discount : Discount,
+    Discount : Discount,
     Modal : Modal,
     Card : Card,
   }
