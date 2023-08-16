@@ -6,40 +6,107 @@
     <Modal @closeModal="is_open=false" :rooms = "rooms" :press_room_num ="press_room_num" :is_open = "is_open"/>
   </Transition>
 
-  <!-- 상단 메뉴 -->
-  <div class="menu">
-    <a v-for="name in menus" :key="name"> {{name}} {{i}}</a>
+  <!-- Nav bar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Housing</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Photo 캐러셀 -->
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/e9826c3e-8515-42d2-a8e0-6a7397fdf2fa" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/3b308ad1-f5d2-45d1-be31-1a22f5565b18" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/ec78c9c4-e834-4253-93e8-4e1c7bc5d44e" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    
+    <!-- 이전/다음 버튼 -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 
-  <!-- 할인 배너 : 컴포넌트 -->
-  <Discount @discounting="discountNum=discountNum" :discountNum = "discountNum"/>
+  <!-- 소개창 -->
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+    </li>
+  </ul>
 
-  <!-- 정렬 버튼 : select 버튼으로 정렬 순서 구분하기가 안되나?
-  <select>
-    <option> 기본 정렬 </option>
-    <option @click="priceSort"> 가격순 정렬 </option>
-  </select>
+  <!-- 검색창 -->
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  
+  <!-- 할인 배너 : 컴포넌트
+  <Discount @discounting="discountNum=discountNum" :discountNum = "discountNum"/>
   -->
 
-  <!-- Vue 로고 -->
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-
-  <h1> 원룸샵 </h1>
+  <!-- 정렬 버튼 모음
   <button @click="priceSortUp" class="roomSortButton"> 가격 낮은순 정렬 </button>
   <button @click="priceSortDown" class="roomSortButton"> 가격 높은순 정렬 </button>
   <button @click="nameSortUp" class="roomSortButton"> 이름순 정렬 </button>
   <button @click="nameSortDown" class="roomSortButton"> 이름 역순 정렬 </button>
   <button @click="rollBack" class="roomSortButton"> 원래대로 </button>
+  !-->
 
-  <!-- 메인 페이지 - 방 미리보기 : 컴포넌트 -->
-  <Card @openModal="is_open=true;
+  <!-- roomdCard 메인 페이지 - 방 미리보기 : 컴포넌트 -->
+  <Card class="roomCard" @openModal="is_open=true;
   press_room_num = $event" :rooms="rooms" :press_room_num="press_room_num" :is_open="is_open"
-  v-for="(rooms, i) in rooms" :key="i"/>
+  v-for="(rooms, i) in rooms" :key="i"/><br>
 
-  <!-- 하단 메뉴 -->
+  <!-- 
   <div class="menu">
     <div class="white-bg" v-if="is_open == true"></div>
   </div>
+  -->
+  
 </template>
 
 
@@ -47,7 +114,7 @@
 <script>
 import Modal from './Modal.vue';
 import room_data from './assets/room_data.js';
-import Discount from './Discount.vue';
+//import Discount from './Discount.vue';
 import Card from './Card.vue';
 
 export default {
@@ -110,7 +177,7 @@ export default {
   // 숙제2 : Modal 입력 기입 후 재렌더링함. lifecycle용어로 update라고 말함. update 전에 hook 걸어보기.
 
   components: { // Component
-    Discount : Discount,
+    //Discount : Discount,
     Modal : Modal,
     Card : Card,
   }
@@ -173,6 +240,7 @@ div{
   box-sizing: border-box;
 }
 
+/* 상세 페이지 */
 .black-bg{
   width: 100%;
   height: 100%;
@@ -188,6 +256,7 @@ div{
   padding: 20px;
 }
 
+/* 전체 */
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -199,15 +268,55 @@ div{
    */
 }
 
-.menu{
-  background: darkslateblue;
-  padding: 15px;
-  border-radius: 7px;
+/* 메인 사진 전체 캐러셀 */ 
+.carousel slide{
+  padding-left: 5%; /* 양옆 여백 */
+  padding-right: 5%;
+  max-height: 700px;
+  max-width: 1700px;
 }
 
-.menu a{
+
+/* 메인 사진 캐러셀 */
+.carousel-inner{
+  padding-left: 5%; /* 양옆 여백 */
+  padding-right: 5%;
+  max-height: 700px;
+  max-width: 1700px;
+}
+
+/* 가이드 라인 */
+.nav justify-content-center{
+  line-height: normal;
+  margin-top: 60px;
+}
+
+/*  카드 */
+.roomCard{
+  justify-content: center;
+  align-items: center;
+  align-content: space-between;
+  float:left;
+}
+
+/* ? */
+.card{
+  justify-content: center;
+  /*
+  
+  align-items: center;
+  align-content: space-between;
+  */
+  max-height: 300px;
+  max-width: 300px;
+}
+
+/* 하단 메뉴 */
+.menu{
+  background: darkslateblue;
   color: white;
-  padding: 10px;
+  padding: 30px;
+  border-radius: 7px;
 }
 
 .room-img{

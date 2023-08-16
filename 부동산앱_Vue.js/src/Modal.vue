@@ -43,12 +43,12 @@ export default {
           }
      }
     },
-
+    
     props : {
         rooms : Array,
         press_room_num : Number,
         is_open : Boolean,
-    }
+    },
 }
 </script>
 
