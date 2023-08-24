@@ -4,7 +4,7 @@
   <div class="card">
     <img :src="rooms.image" class="card-img-top" alt="Room Images">
     <div class="card-body">
-      <h5 class="card-title">{{rooms.title }}</h5>
+      <h5 @click="$emit('openModal', rooms.id)" class="card-title"> {{rooms.title }}</h5>
       <p class="card-text"> {{ rooms.price / 10000}} 만 원</p>
       <a href="#" class="btn btn-primary">Go !!</a>
     </div>

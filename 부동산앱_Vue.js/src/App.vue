@@ -9,7 +9,11 @@
   <!-- Nav bar -->
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Housing</a>
+      <router-link to="/">
+        <a class="navbar-brand" href="#">Housing</a>
+      </router-link>
+
+      <!-- 비율 일정 크기 이하로 내려가면, 나타나는 스크롤 버튼 -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -17,33 +21,61 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link to="/detail">
+              <a class="nav-link active" aria-current="page" href="#">Detail</a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <router-link to="/list">
+              <a class="nav-link" href="#">Blog</a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <router-link to="/">
+              <a class="nav-link" href="#">Pricing</a> <!-- 모든 가격들 -->
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <router-link to="/">
+              <a class="nav-link" href="#">Map</a>
+            </router-link>
           </li>
         </ul>
       </div>
     </div>
+
+    <!-- login -->
+    <div class="login-container" color:black>
+      <router-link to="/">
+        <a> Login </a>
+      </router-link>
+      
+    </div>
   </nav>
+
+  <!-- 메인페이지 상단 줄 -->
+  <div class="text-success">
+    <hr>
+  </div>
+  <hr class="nav hr">
 
   <!-- Main Photo 캐러셀 -->
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/e9826c3e-8515-42d2-a8e0-6a7397fdf2fa" class="d-block w-100" alt="...">
+      <div class="carousel-item active"  data-bs-interval="3000">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/6b77d068-1cfd-4679-aade-fa1aed565fa6" class="d-block w-100" alt="img1">
       </div>
-      <div class="carousel-item">
-        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/3b308ad1-f5d2-45d1-be31-1a22f5565b18" class="d-block w-100" alt="...">
+      <div class="carousel-item"  data-bs-interval="3000">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/f93fdfa1-5987-4e9d-a496-ddeceddc5e01" class="d-block w-100" alt="img2">
       </div>
-      <div class="carousel-item">
-        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/ec78c9c4-e834-4253-93e8-4e1c7bc5d44e" class="d-block w-100" alt="...">
+      <div class="carousel-item"  data-bs-interval="3000">
+        <img src="https://github.com/jinhuck854/Frontend/assets/121598818/0585a0cb-47b9-45ef-b436-3bb0bb759d23" class="d-block w-100" alt="img3">
       </div>
     </div>
     
@@ -58,32 +90,28 @@
     </button>
   </div>
 
-  <!-- 소개창 -->
-  <ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-    </li>
-  </ul>
+  <!-- 메인페이지 하단 줄 -->
+  <hr>
+  <div class="text-success">
+    <hr>
+  </div>
 
   <!-- 검색창 -->
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
+      <a class="navbar-brand" justify-content:center>Search Address</a>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
   </nav>
-  
+
+  <hr>
+
+  <!-- 라우터 -->
+  <router-view></router-view>
+
   <!-- 할인 배너 : 컴포넌트
   <Discount @discounting="discountNum=discountNum" :discountNum = "discountNum"/>
   -->
@@ -96,16 +124,12 @@
   <button @click="rollBack" class="roomSortButton"> 원래대로 </button>
   !-->
 
-  <!-- roomdCard 메인 페이지 - 방 미리보기 : 컴포넌트 -->
-  <Card class="roomCard" @openModal="is_open=true;
-  press_room_num = $event" :rooms="rooms" :press_room_num="press_room_num" :is_open="is_open"
-  v-for="(rooms, i) in rooms" :key="i"/><br>
-
   <!-- 
-  <div class="menu">
-    <div class="white-bg" v-if="is_open == true"></div>
+  <div @click="hidden">
+    <router-link to="/detail"> 상세보기 클릭 </router-link>
   </div>
   -->
+
   
 </template>
 
@@ -115,7 +139,9 @@
 import Modal from './Modal.vue';
 import room_data from './assets/room_data.js';
 //import Discount from './Discount.vue';
-import Card from './Card.vue';
+//import Card from './Card.vue';
+import blogData from './assets/blog_data.js';
+// import List from './components/List.vue'; // Router 쓰기 전, List 끌어오기 (1)
 
 export default {
   name: 'App',
@@ -129,6 +155,7 @@ export default {
       menus : ['Home', 'Shop', 'About', 'Call'],
       report_cnt : [0, 0, 0, 0, 0],
       discountNum : 10, // 할인율 초기값 : 30%
+      blogs : blogData,
     }
   },
 
@@ -161,7 +188,6 @@ export default {
       this.rooms = [...this.roomsOrigin]; // 안되려나?
     },
   },
-
   mounted(){ // LifeCycle : 1초마다 discountNum을 1%씩 감소시킴
     setInterval(()=> { // arrow function 구문을 써야 this 문법을 제대로 사용할 수 있다
       if(this.discountNum > 1)
@@ -179,7 +205,8 @@ export default {
   components: { // Component
     //Discount : Discount,
     Modal : Modal,
-    Card : Card,
+    //Card : Card,
+    // List : List,
   }
 }
 </script>
@@ -206,6 +233,14 @@ Object형으로 클래스명 :
 -->
 
 <style>
+/* 데스크톱 화면 폰트 크기 */
+@media screen and (min-width: 769px){
+  body{
+    font-size: 17px;
+  }
+}
+
+/* 화면 전환 애니메이션 */
 .fade-enter-from{ /* 시작 */
   opacity: 0;
 }
@@ -258,6 +293,7 @@ div{
 
 /* 전체 */
 #app {
+  font-size: 17px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -268,47 +304,74 @@ div{
    */
 }
 
-/* 메인 사진 전체 캐러셀 */ 
+/* 라인 */
+.nav hr{
+  margin : 10px;
+  margin-top :
+  /*padding: 0px 0px; */
+}
+
+/* 로그인 */
+.login-container{
+  padding-right: 2%;
+}
+
+.navbar bg-body-tertiary{
+  position: relative;
+}
+
+.container-fluid{
+  position: relative;
+  left: 2px;
+}
+
+/* 전체 캐러셀 */ 
 .carousel slide{
-  padding-left: 5%; /* 양옆 여백 */
-  padding-right: 5%;
+  padding-left: 10%; /* 양옆 여백 */
+  padding-right: 10%;
+
   max-height: 700px;
-  max-width: 1700px;
-}
-
-
-/* 메인 사진 캐러셀 */
-.carousel-inner{
-  padding-left: 5%; /* 양옆 여백 */
-  padding-right: 5%;
-  max-height: 700px;
-  max-width: 1700px;
-}
-
-/* 가이드 라인 */
-.nav justify-content-center{
-  line-height: normal;
-  margin-top: 60px;
-}
-
-/*  카드 */
-.roomCard{
-  justify-content: center;
-  align-items: center;
-  align-content: space-between;
-  float:left;
-}
-
-/* ? */
-.card{
-  justify-content: center;
-  /*
+  min-height: 500px;
+  max-width: 1800px;
+  min-width: 1000px;
   
-  align-items: center;
-  align-content: space-between;
+}
+
+/* 캐러셀 내부 사진 외곽
+  !! 여길 수정해야 사진들 크기가 달라짐
+*/
+.carousel-inner{
+  padding: 2% 2% 0% 2%;
+  justify-content: center;
+  max-height: 1000px;
+  object-fit: cover;
+  /*
+  background-position: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 0%;
   */
-  max-height: 300px;
-  max-width: 300px;
+}
+
+.carousel-inner img{
+  max-height: 1200px;
+  object-fit: cover;
+}
+
+/* 캐러셀 내부 사진 박스 */
+.carousel-item active{
+  object-fit: cover;
+}
+
+.carousel-item
+
+/* 중앙 검색창 */
+.navbar bg-body-tertiary{
+  justify-content: center;
+}
+
+.blog{
+  font-size: 17px;
 }
 
 /* 하단 메뉴 */
